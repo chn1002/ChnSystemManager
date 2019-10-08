@@ -1,0 +1,10 @@
+D:\workspace\ChnSystemManager\hnSystemManager\hnSystemManager\bin\Debug\hnSystemManager.exe.config
+D:\workspace\ChnSystemManager\hnSystemManager\hnSystemManager\bin\Debug\hnSystemManager.exe
+D:\workspace\ChnSystemManager\hnSystemManager\hnSystemManager\bin\Debug\hnSystemManager.pdb
+D:\workspace\ChnSystemManager\hnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.Properties.Resources.resources
+D:\workspace\ChnSystemManager\hnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.csproj.GenerateResource.cache
+D:\workspace\ChnSystemManager\hnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.csproj.CoreCompileInputs.cache
+D:\workspace\ChnSystemManager\hnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.exe
+D:\workspace\ChnSystemManager\hnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.pdb
+D:\workspace\ChnSystemManager\hnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.MainSystemManagerForm.resources
+D:\workspace\ChnSystemManager\hnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.csprojAssemblyReference.cache

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<chnProjectConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" programName="WatchDog" debugMode="true" MaxNetworkEntry="3">
+  <NetworkSystem>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.50.10.182</NetworkAddress>
+      <port>5090</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.21</NetworkAddress>
+      <port>12000</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.22</NetworkAddress>
+      <port>12000</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.23</NetworkAddress>
+      <port>12000</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.24</NetworkAddress>
+      <port>12000</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.25</NetworkAddress>
+      <port>12000</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.26</NetworkAddress>
+      <port>12000</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.27</NetworkAddress>
+      <port>12000</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.28</NetworkAddress>
+      <port>12000</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.201</NetworkAddress>
+      <port>21</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.201</NetworkAddress>
+      <port>22</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+    <NetworkSystemEntry>
+      <enable>false</enable>
+      <NetworkAddress>10.56.29.201</NetworkAddress>
+      <port>23</port>
+      <Description>Item Description</Description>
+    </NetworkSystemEntry>
+  </NetworkSystem>
+</chnProjectConfig>
