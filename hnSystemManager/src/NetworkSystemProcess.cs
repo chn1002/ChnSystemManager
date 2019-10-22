@@ -100,7 +100,6 @@ namespace hnSystemManager.src
                     TcpClient tcClient = listener.AcceptTcpClient();
 
                     string info = tcClient.Client.RemoteEndPoint.ToString();
-                    mMainsystemForm.setRemoteControlerClientInformation(info);
 
                     connectedClients.Add(tcClient.Client);
                     Thread ReceiveThread = new Thread(new ParameterizedThreadStart(HandleClientComm));

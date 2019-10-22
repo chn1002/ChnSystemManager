@@ -16,19 +16,12 @@ namespace hnSystemManager.src
         [XmlAttribute]
         public bool debugMode;
 
-        [XmlAttribute]
-        public int MaxNetworkEntry = 3;
-
         public SystemManager mSystemManager;
-        public NetworkSystemEntry[] NetworkSystem;
 
         public xmlDataConfig()
         {
             debugMode = true;
             mSystemManager = new SystemManager();
-            NetworkSystemEntry TmpNetworkSystem = new NetworkSystemEntry();
-            NetworkSystem = new NetworkSystemEntry[MaxNetworkEntry];
-            NetworkSystem[0] = TmpNetworkSystem;
         }
 
         public class SystemManager
@@ -37,17 +30,12 @@ namespace hnSystemManager.src
             {
                 startVisible = true;
                 saveLogfile = false;
-                socketTimeout = 2;
-                controlServerPort = 50000;
                 NetworkManagerServerMode = true;
                 NetworkManagerServerPort = 55000;
             }
 
             [XmlElement("saveLogfile")]
             public bool saveLogfile { get; set; }
-
-            [XmlElement("socketTimeout")]
-            public int socketTimeout { get; set; }
 
             [XmlElement("controlServerPort")]
             public int controlServerPort { get; set; }
@@ -60,29 +48,6 @@ namespace hnSystemManager.src
 
             [XmlElement("NetworkManagerServerPort")]
             public int NetworkManagerServerPort { get; set; }
-        }
-
-        public class NetworkSystemEntry
-        {
-            public NetworkSystemEntry()
-            {
-                enable = false;
-                NetworkAddress = "127.0.0.1";
-                port = 12000;
-                Description = "Item Description";
-            }
-
-            [XmlElement("enable")]
-            public bool enable { get; set; }
-
-            [XmlElement("NetworkAddress")]
-            public string NetworkAddress { get; set; }
-
-            [XmlElement("port")]
-            public int port { get; set; }
-
-            [XmlElement("Description")]
-            public string Description { get; set; }
         }
     }
 }

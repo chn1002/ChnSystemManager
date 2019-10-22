@@ -30,209 +30,37 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainSystemManagerForm));
-            this.btICMPTest = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btPortTest = new System.Windows.Forms.Button();
-            this.btContents = new System.Windows.Forms.Button();
-            this.lbStatus = new System.Windows.Forms.Label();
-            this.lbStatusValue = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbCommand = new System.Windows.Forms.TextBox();
-            this.btAllCommand = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lbConnectionClient = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.ctMenuStripTray = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.종료ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DisplayPanel = new System.Windows.Forms.Panel();
+            this.ControlPanel = new System.Windows.Forms.Panel();
+            this.lbSerivceType = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.btIdle = new System.Windows.Forms.Button();
+            this.btPlay = new System.Windows.Forms.Button();
+            this.btVideoMain = new System.Windows.Forms.Button();
+            this.btVideoIntro = new System.Windows.Forms.Button();
+            this.btStop = new System.Windows.Forms.Button();
+            this.btPause = new System.Windows.Forms.Button();
+            this.lbInformation = new System.Windows.Forms.Label();
             this.ctMenuStripTray.SuspendLayout();
+            this.DisplayPanel.SuspendLayout();
+            this.ControlPanel.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btICMPTest
-            // 
-            this.btICMPTest.Location = new System.Drawing.Point(1084, 67);
-            this.btICMPTest.Name = "btICMPTest";
-            this.btICMPTest.Size = new System.Drawing.Size(103, 38);
-            this.btICMPTest.TabIndex = 7;
-            this.btICMPTest.Text = "네트워크 테스트";
-            this.btICMPTest.UseVisualStyleBackColor = true;
-            this.btICMPTest.Click += new System.EventHandler(this.btICMPTest_Click);
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(80, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 20);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "IP 주소";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(200, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 20);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "포트";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(300, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(120, 20);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "네트워크 상태";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label4.Location = new System.Drawing.Point(680, 9);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 20);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "명령";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label5.Location = new System.Drawing.Point(12, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 20);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "번호";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label6.Location = new System.Drawing.Point(420, 9);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(120, 20);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "포트 상태";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label7
-            // 
-            this.label7.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label7.Location = new System.Drawing.Point(540, 9);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(120, 20);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "컨탠츠 상태";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btPortTest
-            // 
-            this.btPortTest.Location = new System.Drawing.Point(1084, 111);
-            this.btPortTest.Name = "btPortTest";
-            this.btPortTest.Size = new System.Drawing.Size(103, 38);
-            this.btPortTest.TabIndex = 15;
-            this.btPortTest.Text = "포트 테스트";
-            this.btPortTest.UseVisualStyleBackColor = true;
-            this.btPortTest.Click += new System.EventHandler(this.btPortTest_Click);
-            // 
-            // btContents
-            // 
-            this.btContents.Location = new System.Drawing.Point(1084, 155);
-            this.btContents.Name = "btContents";
-            this.btContents.Size = new System.Drawing.Size(103, 38);
-            this.btContents.TabIndex = 16;
-            this.btContents.Text = "캔탠츠 테스트";
-            this.btContents.UseVisualStyleBackColor = true;
-            this.btContents.Click += new System.EventHandler(this.btContents_Click);
-            // 
-            // lbStatus
-            // 
-            this.lbStatus.AutoSize = true;
-            this.lbStatus.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lbStatus.Location = new System.Drawing.Point(1082, 17);
-            this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(31, 12);
-            this.lbStatus.TabIndex = 17;
-            this.lbStatus.Text = "상태";
-            // 
-            // lbStatusValue
-            // 
-            this.lbStatusValue.AutoSize = true;
-            this.lbStatusValue.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lbStatusValue.Location = new System.Drawing.Point(1082, 42);
-            this.lbStatusValue.Name = "lbStatusValue";
-            this.lbStatusValue.Size = new System.Drawing.Size(66, 12);
-            this.lbStatusValue.TabIndex = 18;
-            this.lbStatusValue.Text = "Checking";
-            // 
-            // label8
-            // 
-            this.label8.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label8.Location = new System.Drawing.Point(800, 9);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 20);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "결과";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tbCommand
-            // 
-            this.tbCommand.Location = new System.Drawing.Point(1084, 245);
-            this.tbCommand.Name = "tbCommand";
-            this.tbCommand.Size = new System.Drawing.Size(100, 21);
-            this.tbCommand.TabIndex = 20;
-            // 
-            // btAllCommand
-            // 
-            this.btAllCommand.Location = new System.Drawing.Point(1084, 272);
-            this.btAllCommand.Name = "btAllCommand";
-            this.btAllCommand.Size = new System.Drawing.Size(103, 38);
-            this.btAllCommand.TabIndex = 21;
-            this.btAllCommand.Text = "명령 전송";
-            this.btAllCommand.UseVisualStyleBackColor = true;
-            this.btAllCommand.Click += new System.EventHandler(this.btAllCommand_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label9.Location = new System.Drawing.Point(1082, 222);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(31, 12);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "명령";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label10.Location = new System.Drawing.Point(1082, 331);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(74, 12);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "접속 Client";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbConnectionClient
-            // 
-            this.lbConnectionClient.AutoSize = true;
-            this.lbConnectionClient.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lbConnectionClient.Location = new System.Drawing.Point(1082, 358);
-            this.lbConnectionClient.Name = "lbConnectionClient";
-            this.lbConnectionClient.Size = new System.Drawing.Size(41, 12);
-            this.lbConnectionClient.TabIndex = 24;
-            this.lbConnectionClient.Text = "client";
-            this.lbConnectionClient.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // notifyIcon1
             // 
@@ -247,71 +75,267 @@
             this.ctMenuStripTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.종료ToolStripMenuItem});
             this.ctMenuStripTray.Name = "ctMenuStripTray";
-            this.ctMenuStripTray.Size = new System.Drawing.Size(181, 48);
+            this.ctMenuStripTray.Size = new System.Drawing.Size(99, 26);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.종료ToolStripMenuItem.Text = "종료";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.systemExit);
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.FullRowSelect = true;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(912, 339);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "EndPoint";
+            this.columnHeader1.Width = 150;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "ID";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 200;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Last msg";
+            this.columnHeader3.Width = 300;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Last Rec Time";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader4.Width = 150;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Socket";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader5.Width = 100;
+            // 
+            // DisplayPanel
+            // 
+            this.DisplayPanel.Controls.Add(this.listView1);
+            this.DisplayPanel.Location = new System.Drawing.Point(0, 105);
+            this.DisplayPanel.Name = "DisplayPanel";
+            this.DisplayPanel.Size = new System.Drawing.Size(912, 339);
+            this.DisplayPanel.TabIndex = 1;
+            // 
+            // ControlPanel
+            // 
+            this.ControlPanel.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.ControlPanel.Controls.Add(this.lbInformation);
+            this.ControlPanel.Controls.Add(this.btPause);
+            this.ControlPanel.Controls.Add(this.btStop);
+            this.ControlPanel.Controls.Add(this.btVideoIntro);
+            this.ControlPanel.Controls.Add(this.btVideoMain);
+            this.ControlPanel.Controls.Add(this.btPlay);
+            this.ControlPanel.Controls.Add(this.btIdle);
+            this.ControlPanel.Controls.Add(this.lbSerivceType);
+            this.ControlPanel.Controls.Add(this.checkBox1);
+            this.ControlPanel.Controls.Add(this.button1);
+            this.ControlPanel.Controls.Add(this.textBox1);
+            this.ControlPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ControlPanel.Location = new System.Drawing.Point(0, 0);
+            this.ControlPanel.Name = "ControlPanel";
+            this.ControlPanel.Size = new System.Drawing.Size(912, 100);
+            this.ControlPanel.TabIndex = 2;
+            // 
+            // lbSerivceType
+            // 
+            this.lbSerivceType.AutoSize = true;
+            this.lbSerivceType.Location = new System.Drawing.Point(12, 9);
+            this.lbSerivceType.Name = "lbSerivceType";
+            this.lbSerivceType.Size = new System.Drawing.Size(47, 12);
+            this.lbSerivceType.TabIndex = 3;
+            this.lbSerivceType.Text = "Service";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(691, 73);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(192, 16);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "Check All Client Connecttions";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(581, 64);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(88, 32);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "전송하기";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 68);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(563, 21);
+            this.textBox1.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(0, 452);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(912, 130);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "삭제 된 클라이언트";
+            // 
+            // listBox1
+            // 
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(3, 17);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(906, 110);
+            this.listBox1.TabIndex = 0;
+            // 
+            // btIdle
+            // 
+            this.btIdle.Location = new System.Drawing.Point(14, 39);
+            this.btIdle.Name = "btIdle";
+            this.btIdle.Size = new System.Drawing.Size(75, 23);
+            this.btIdle.TabIndex = 4;
+            this.btIdle.Text = "IDLE";
+            this.btIdle.UseVisualStyleBackColor = true;
+            this.btIdle.Click += new System.EventHandler(this.button_Click);
+            // 
+            // btPlay
+            // 
+            this.btPlay.Location = new System.Drawing.Point(257, 39);
+            this.btPlay.Name = "btPlay";
+            this.btPlay.Size = new System.Drawing.Size(75, 23);
+            this.btPlay.TabIndex = 5;
+            this.btPlay.Text = "Play";
+            this.btPlay.UseVisualStyleBackColor = true;
+            this.btPlay.Click += new System.EventHandler(this.button_Click);
+            // 
+            // btVideoMain
+            // 
+            this.btVideoMain.Location = new System.Drawing.Point(176, 39);
+            this.btVideoMain.Name = "btVideoMain";
+            this.btVideoMain.Size = new System.Drawing.Size(75, 23);
+            this.btVideoMain.TabIndex = 6;
+            this.btVideoMain.Text = "VideoMain";
+            this.btVideoMain.UseVisualStyleBackColor = true;
+            this.btVideoMain.Click += new System.EventHandler(this.button_Click);
+            // 
+            // btVideoIntro
+            // 
+            this.btVideoIntro.Location = new System.Drawing.Point(95, 39);
+            this.btVideoIntro.Name = "btVideoIntro";
+            this.btVideoIntro.Size = new System.Drawing.Size(75, 23);
+            this.btVideoIntro.TabIndex = 7;
+            this.btVideoIntro.Text = "Video Intro";
+            this.btVideoIntro.UseVisualStyleBackColor = true;
+            this.btVideoIntro.Click += new System.EventHandler(this.button_Click);
+            // 
+            // btStop
+            // 
+            this.btStop.Location = new System.Drawing.Point(419, 39);
+            this.btStop.Name = "btStop";
+            this.btStop.Size = new System.Drawing.Size(75, 23);
+            this.btStop.TabIndex = 8;
+            this.btStop.Text = "Stop";
+            this.btStop.UseVisualStyleBackColor = true;
+            this.btStop.Click += new System.EventHandler(this.button_Click);
+            // 
+            // btPause
+            // 
+            this.btPause.Location = new System.Drawing.Point(338, 39);
+            this.btPause.Name = "btPause";
+            this.btPause.Size = new System.Drawing.Size(75, 23);
+            this.btPause.TabIndex = 9;
+            this.btPause.Text = "Pause";
+            this.btPause.UseVisualStyleBackColor = true;
+            this.btPause.Click += new System.EventHandler(this.button_Click);
+            // 
+            // lbInformation
+            // 
+            this.lbInformation.AutoSize = true;
+            this.lbInformation.Location = new System.Drawing.Point(579, 9);
+            this.lbInformation.Name = "lbInformation";
+            this.lbInformation.Size = new System.Drawing.Size(67, 12);
+            this.lbInformation.TabIndex = 10;
+            this.lbInformation.Text = "Information";
             // 
             // MainSystemManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1199, 624);
-            this.Controls.Add(this.lbConnectionClient);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.btAllCommand);
-            this.Controls.Add(this.tbCommand);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.lbStatusValue);
-            this.Controls.Add(this.lbStatus);
-            this.Controls.Add(this.btContents);
-            this.Controls.Add(this.btPortTest);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btICMPTest);
+            this.ClientSize = new System.Drawing.Size(912, 582);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.ControlPanel);
+            this.Controls.Add(this.DisplayPanel);
             this.Name = "MainSystemManagerForm";
             this.Text = "SystemManager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Closing);
             this.Load += new System.EventHandler(this.MainSystemManagerForm_Load);
             this.ctMenuStripTray.ResumeLayout(false);
+            this.DisplayPanel.ResumeLayout(false);
+            this.ControlPanel.ResumeLayout(false);
+            this.ControlPanel.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btICMPTest;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btPortTest;
-        private System.Windows.Forms.Button btContents;
-        private System.Windows.Forms.Label lbStatus;
-        private System.Windows.Forms.Label lbStatusValue;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox tbCommand;
-        private System.Windows.Forms.Button btAllCommand;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label lbConnectionClient;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip ctMenuStripTray;
         private System.Windows.Forms.ToolStripMenuItem 종료ToolStripMenuItem;
+        private System.Windows.Forms.Panel DisplayPanel;
+        private System.Windows.Forms.Panel ControlPanel;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Label lbSerivceType;
+        private System.Windows.Forms.Button btPause;
+        private System.Windows.Forms.Button btStop;
+        private System.Windows.Forms.Button btVideoIntro;
+        private System.Windows.Forms.Button btVideoMain;
+        private System.Windows.Forms.Button btPlay;
+        private System.Windows.Forms.Button btIdle;
+        private System.Windows.Forms.Label lbInformation;
     }
 }
 

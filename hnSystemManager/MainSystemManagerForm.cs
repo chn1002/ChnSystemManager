@@ -1,5 +1,9 @@
 ﻿using hnSystemManager.src.util;
+using Jerrryfighter.MultipleSocket;
 using System;
+using System.Diagnostics;
+using System.Net.Sockets;
+using System.Text;
 using System.Windows.Forms;
 using static hnSystemManager.src.xmlDataConfig;
 
@@ -7,356 +11,118 @@ namespace hnSystemManager
 {
     public partial class MainSystemManagerForm : Form
     {
-        private readonly int WIDTH_GAP = 120;
-        private readonly int HEIGHT_GAP = 30;
-
-        class networkGUI
-        {
-            internal Label lbIndex;
-            internal Label lbNetwork;
-            internal Label lbNetworkPort;
-            internal Label lbNetworkStatus;
-            internal Label lbNetworkPortStatus;
-            internal Label lbContentsStatus;
-            internal TextBox tbCommandTextBox;
-            internal Label lbCommandResult;
-            internal Button btCheckButton;
-        }
-
-        networkGUI[] netGUIEntry;
-
         public MainSystemManagerForm()
         {
             InitializeComponent();
-            InitializeCustomComponent();
-        }
 
-        private void InitializeCustomComponent()
-        {
-            int index = 0;
-            int counter = 0;
-            netGUIEntry = new networkGUI[Program.GetXmlDataConfig().NetworkSystem.Length];
-
-            foreach (NetworkSystemEntry nsE in Program.GetXmlDataConfig().NetworkSystem)
-            {
-                if (nsE != null)
-                {
-                    netGUIEntry[index] = new networkGUI();
-                    netGUIEntry[index].lbIndex = new Label();
-                    netGUIEntry[index].lbIndex.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-                    netGUIEntry[index].lbIndex.Location = new System.Drawing.Point(12, 50 + (index * HEIGHT_GAP));
-                    netGUIEntry[index].lbIndex.Name = "lbIndex" + index;
-                    netGUIEntry[index].lbIndex.Size = new System.Drawing.Size(30, 20);
-                    netGUIEntry[index].lbIndex.TabIndex = index;
-                    netGUIEntry[index].lbIndex.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                    netGUIEntry[index].lbIndex.Text = (index + 1).ToString();
-
-                    netGUIEntry[index].lbNetwork = new Label();
-                    CreateCustomLabel(netGUIEntry[index].lbNetwork, 
-                        index, 
-                        80 + (counter++ * WIDTH_GAP), 
-                        50 + (index * HEIGHT_GAP), 
-                        "lbNetwork" + index, 
-                        nsE.NetworkAddress);
-
-                    netGUIEntry[index].lbNetworkPort = new Label();
-                    CreateCustomLabel(netGUIEntry[index].lbNetworkPort,
-                        index,
-                        80 + (counter++ * WIDTH_GAP),
-                        50 + (index * HEIGHT_GAP),
-                        "lbNetworkPort" + index,
-                        nsE.port.ToString());
-
-                    netGUIEntry[index].lbNetworkStatus = new Label();
-                    CreateCustomLabel(netGUIEntry[index].lbNetworkStatus,
-                        index,
-                        80 + (counter++ * WIDTH_GAP),
-                        50 + (index * HEIGHT_GAP),
-                        "lbNetworkStatus" + index,
-                        "알수없음");
-
-                    netGUIEntry[index].lbNetworkPortStatus = new Label();
-                    CreateCustomLabel(netGUIEntry[index].lbNetworkPortStatus,
-                        index,
-                        80 + (counter++ * WIDTH_GAP),
-                        50 + (index * HEIGHT_GAP),
-                        "lbNetworkPortStatus" + index,
-                        "알수없음");
-
-                    netGUIEntry[index].lbContentsStatus = new Label();
-                    CreateCustomLabel(netGUIEntry[index].lbContentsStatus,
-                        index,
-                        80 + (counter++ * WIDTH_GAP),
-                        50 + (index * HEIGHT_GAP),
-                        "lbContentsStatus" + index,
-                        "알수없음");
-                    
-                    netGUIEntry[index].tbCommandTextBox = new TextBox();
-                    CreateCustomTextbox(netGUIEntry[index].tbCommandTextBox,
-                        index,
-                        80 + (counter++ * WIDTH_GAP),
-                        50 + (index * HEIGHT_GAP),
-                        "tbCommand" + index);
-
-                    netGUIEntry[index].lbCommandResult = new Label();
-                    CreateCustomLabel(netGUIEntry[index].lbCommandResult,
-                        index,
-                        80 + (counter++ * WIDTH_GAP),
-                        50 + (index * HEIGHT_GAP),
-                        "lbCommandResult" + index,
-                        "알수없음");
-
-                    netGUIEntry[index].btCheckButton = new Button();
-                    CreateCustomButton(netGUIEntry[index].btCheckButton,
-                        index,
-                        80 + (counter++ * WIDTH_GAP),
-                        50 + (index * HEIGHT_GAP),
-                        "btCheck" + index,
-                        "명령실행");
-
-                    Controls.Add(netGUIEntry[index].lbIndex);
-                    Controls.Add(netGUIEntry[index].lbNetwork);
-                    Controls.Add(netGUIEntry[index].lbNetworkPort);
-                    Controls.Add(netGUIEntry[index].lbNetworkStatus);
-                    Controls.Add(netGUIEntry[index].lbNetworkPortStatus);
-                    Controls.Add(netGUIEntry[index].lbContentsStatus);
-                    Controls.Add(netGUIEntry[index].lbCommandResult);
-                    Controls.Add(netGUIEntry[index].tbCommandTextBox);
-                    Controls.Add(netGUIEntry[index].btCheckButton);
-
-                    index++;
-                    counter = 0;
-                }
-            }
-
-            lbStatusValue.Text = "초기값";
-            lbConnectionClient.Text = "없음";
-        }
-
-        internal void setRemoteControlerClientInformation(string information)
-        {
-            this.Invoke(new Action(delegate ()
-            {
-                lbConnectionClient.Text = information;
-            }));
-        }
-
-        private void CreateCustomLabel(Label lbCustom, int index, int xPoint, int yPoint, string name, string text)
-        {
-            lbCustom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            lbCustom.Location = new System.Drawing.Point(xPoint, yPoint);
-            lbCustom.Name = name;
-            lbCustom.Size = new System.Drawing.Size(75, 20);
-            lbCustom.TabIndex = index;
-            lbCustom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            lbCustom.Text = text;
-        }
-
-        private void CreateCustomTextbox(TextBox tbCustom, int index, int xPoint, int yPoint, string name)
-        {
-            tbCustom.Location = new System.Drawing.Point(xPoint, yPoint);
-            tbCustom.Name = name;
-            tbCustom.Size = new System.Drawing.Size(100, 21);
-            tbCustom.TabIndex = index;
-        }
-
-        private void CreateCustomButton(Button btCustom, int index, int xPoint, int yPoint, string name, string text)
-        {
-            btCustom.Location = new System.Drawing.Point(xPoint, yPoint);
-            btCustom.Name = name;
-            btCustom.Size = new System.Drawing.Size(75, 23);
-            btCustom.TabIndex = index;
-            btCustom.Text = text;
-            btCustom.UseVisualStyleBackColor = true;
-            btCustom.Click += new System.EventHandler(btCheck_Click);
-        }
-
-        private void btCheck_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = (Button)sender;
-            int index = clickedButton.TabIndex;
-            lbStatusValue.Text = "테스트 중";
-
-            bool resultCommand = false;
-
-            if(Program.getSystemConnectionClient(index))
-            {
-                resultCommand = Program.sendSystemCommand(index, netGUIEntry[index].tbCommandTextBox.Text);
-            }
-
-            if(resultCommand)
-            {
-                netGUIEntry[index].lbCommandResult.Text = "전송 성공";
-                netGUIEntry[index].lbCommandResult.ForeColor = System.Drawing.Color.Black;
-            }
-            else
-            {
-                netGUIEntry[index].lbCommandResult.Text = "전송 실패";
-                netGUIEntry[index].lbCommandResult.ForeColor = System.Drawing.Color.Red;
-            }
-
-            lbStatusValue.Text = "테스트 완료";
+            lbSerivceType.Text = "Service Type: Server Mode";
+            updateInformation();
         }
 
         internal void writeDebug(string log)
         {
-            Console.WriteLine(log);
+//            Console.WriteLine(log);
         }
 
-        private void btICMPTest_Click(object sender, EventArgs e)
+        internal void ListenerDisconnect(Client sender)
         {
-            bool icmpTest = false;
-            lbStatusValue.Text = "테스트 중";
-
-            for (int index = 0; index < netGUIEntry.Length; index++)
+            Invoke((MethodInvoker)delegate
             {
-                icmpTest = Program.systemClientICMPTest(index);
-
-                if (icmpTest)
+                for (int i = 0; i < listView1.Items.Count; i++)
                 {
-                    netGUIEntry[index].lbNetworkStatus.Text = "접속 가능";
-                    netGUIEntry[index].lbNetworkStatus.ForeColor = System.Drawing.Color.Black;
-                }
-                else
-                {
-                    netGUIEntry[index].lbNetworkStatus.Text = "접속 불가";
-                    netGUIEntry[index].lbNetworkStatus.ForeColor = System.Drawing.Color.Red;
-                }
-            }
+                    Client client = listView1.Items[i].Tag as Client;
 
-            lbStatusValue.Text = "테스트 완료";
+                    if (client.ID == sender.ID)
+                    {
+                        listView1.Items.RemoveAt(i);
+                        break;
+                    }
+                }
+
+                updateInformation();
+            });
         }
 
-        private void btPortTest_Click(object sender, EventArgs e)
+        internal void ListenerAccepted(Client client, string cont)
         {
-            bool portResult = false;
-            lbStatusValue.Text = "테스트 중";
-
-            for (int index = 0; index < netGUIEntry.Length; index++)
+            Invoke((MethodInvoker)delegate
             {
-                portResult = Program.systemClientPortScan(index);
+                ListViewItem item = new ListViewItem();
+                item.Text = client.EndPoint.ToString();
+                item.SubItems.Add(client.ID);
+                item.SubItems.Add("XXX");
+                item.SubItems.Add("YYY");
+                item.SubItems.Add(cont);
+                item.Tag = client;
+                listView1.Items.Add(item);
 
-
-                if (portResult)
-                {
-                    netGUIEntry[index].lbNetworkPortStatus.Text = "접속 가능";
-                    netGUIEntry[index].lbNetworkPortStatus.ForeColor = System.Drawing.Color.Black;
-                }
-                else
-                {
-                    netGUIEntry[index].lbNetworkPortStatus.Text = "접속 불가";
-                    netGUIEntry[index].lbNetworkPortStatus.ForeColor = System.Drawing.Color.Red;
-                }
-            }
-
-            lbStatusValue.Text = "테스트 완료";
+                updateInformation();
+            });
         }
 
-        private void btContents_Click(object sender, EventArgs e)
+        internal void ListenerRecevied(Client sender, byte[] data)
         {
-            bool clientResult = false;
-            lbStatusValue.Text = "테스트 중";
-
-            for (int index = 0; index < netGUIEntry.Length; index++)
+            Invoke((MethodInvoker)delegate
             {
-                clientResult = Program.systemClientScan(index);
-
-
-                if (clientResult)
+                for (int i = 0; i < listView1.Items.Count; i++)
                 {
-                    netGUIEntry[index].lbContentsStatus.Text = "접속 가능";
-                    netGUIEntry[index].lbContentsStatus.ForeColor = System.Drawing.Color.Black;
-                }
-                else
-                {
-                    netGUIEntry[index].lbContentsStatus.Text = "접속 불가";
-                    netGUIEntry[index].lbContentsStatus.ForeColor = System.Drawing.Color.Red;
-                }
-            }
+                    Client client = listView1.Items[i].Tag as Client;
 
-            lbStatusValue.Text = "테스트 완료";
+                    if (client.ID == sender.ID)
+                    {
+                        listView1.Items[i].SubItems[2].Text = Encoding.UTF8.GetString(data, 0, data.Length);
+                        listView1.Items[i].SubItems[3].Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        break;
+                    }
+                }
+            });
         }
 
-        private void btAllCommand_Click(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            lbStatusValue.Text = "테스트 중";
-            string command = tbCommand.Text;
-            bool resultCommand = false;
-
-            for (int index = 0; index < netGUIEntry.Length; index++)
+            if (checkBox1.Checked)
             {
-                if (Program.getSystemConnectionClient(index))
-                {
-                    resultCommand = Program.sendSystemCommand(index, command);
-                }
-                else
-                {
-                    resultCommand = false;
-                }
+                //
+                timer1.Tick += new EventHandler(TimerEventProcessor);
 
-                if (resultCommand)
-                {
-                    netGUIEntry[index].lbCommandResult.Text = "전송 성공";
-                    netGUIEntry[index].lbCommandResult.ForeColor = System.Drawing.Color.Black;
-                }
-                else
-                {
-                    netGUIEntry[index].lbCommandResult.Text = "전송 실패";
-                    netGUIEntry[index].lbCommandResult.ForeColor = System.Drawing.Color.Red;
-                }
-
-                netGUIEntry[index].tbCommandTextBox.Text = command;
+                // Sets the timer interval to 10 seconds.
+                timer1.Interval = 10000;
+                timer1.Start();
             }
-
-            lbStatusValue.Text = "테스트 완료";
+            else
+                timer1.Stop();
         }
 
-        public void InitializeNetwork()
+        private void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
         {
-            bool icmpTest = false;
-            bool clientResult = false;
-            bool portResult = false;
+            Trace.WriteLine("Event raise the TimerEventProcessor");
 
-            for (int index = 0; index < netGUIEntry.Length; index++)
+            Invoke((MethodInvoker)delegate
             {
-                icmpTest = Program.systemClientICMPTest(index);
-                portResult = Program.systemClientPortScan(index);
-                clientResult = Program.systemClientScan(index);
+                for (int i = 0; i < listView1.Items.Count; i++)
+                {
+                    Client client = listView1.Items[i].Tag as Client;
 
-                if (icmpTest)
-                {
-                    netGUIEntry[index].lbNetworkStatus.Text = "접속 가능";
-                    netGUIEntry[index].lbNetworkStatus.ForeColor = System.Drawing.Color.Black;
+                    if (client.sck.Connected)
+                        client.SendMessage(BitConverter.GetBytes((int)0));
+                    else
+                    {
+                        this.ListenerDisconnect(client);
+                        DisconnectedClientList(client.sck);
+                    }
                 }
-                else
-                {
-                    netGUIEntry[index].lbNetworkStatus.Text = "접속 불가";
-                    netGUIEntry[index].lbNetworkStatus.ForeColor = System.Drawing.Color.Red;
-                }
-
-                if (portResult)
-                {
-                    netGUIEntry[index].lbNetworkPortStatus.Text = "접속 가능";
-                    netGUIEntry[index].lbNetworkPortStatus.ForeColor = System.Drawing.Color.Black;
-                }
-                else
-                {
-                    netGUIEntry[index].lbNetworkPortStatus.Text = "접속 불가";
-                    netGUIEntry[index].lbNetworkPortStatus.ForeColor = System.Drawing.Color.Red;
-                }
-
-                if (clientResult)
-                {
-                    netGUIEntry[index].lbContentsStatus.Text = "접속 가능";
-                    netGUIEntry[index].lbContentsStatus.ForeColor = System.Drawing.Color.Black;
-                }
-                else
-                {
-                    netGUIEntry[index].lbContentsStatus.Text = "접속 불가";
-                    netGUIEntry[index].lbContentsStatus.ForeColor = System.Drawing.Color.Red;
-                }
-            }
+            });
         }
+
+        private void DisconnectedClientList(Socket sck)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                listBox1.Items.Add(sck.Handle.ToString());
+                updateInformation();
+            });
+        }
+
 
         private void MainSystemManagerForm_Load(object sender, EventArgs e)
         {
@@ -366,6 +132,15 @@ namespace hnSystemManager
         private void Form_Closing(object sender, FormClosingEventArgs e)
         {
             Dispose(true);
+
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                Client client = listView1.Items[i].Tag as Client;
+
+                if (client.sck.Connected)
+                    client.Close();
+            }
+
             Program.systemShutdown();
         }
 
@@ -394,5 +169,58 @@ namespace hnSystemManager
         {
             Program.systemShutdown();
         }
+
+        private void sendMessage(String message)
+        {
+            Program.mLogProc.DebugLog("Test : " + message);
+
+            Invoke((MethodInvoker)delegate
+            {
+                for (int i = 0; i < listView1.Items.Count; i++)
+                {
+                    Client client = listView1.Items[i].Tag as Client;
+
+                    if (client.sck.Connected)
+                        client.SendMessage(Encoding.UTF8.GetBytes(message));
+                }
+            });
+        }
+
+        private void updateInformation()
+        {
+            lbInformation.Text = "Client Number: " + listView1.Items.Count;
+        }
+
+        private void button_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            String name = button.Name;
+
+            if (name.Equals("btIdle"))
+            {
+                sendMessage("IDLE");
+            } else if (name.Equals("btVideoIntro"))
+            {
+                sendMessage("VIDEO_INTRO");
+            } else if (name.Equals("btVideoMain"))
+            {
+                sendMessage("VIDEO_MAIN");
+            } else if (name.Equals("btPlay"))
+            {
+                sendMessage("VIDEO_PLAY");
+            } else if (name.Equals("btPause"))
+            {
+                sendMessage("VIDEO_PAUSE");
+            } else if (name.Equals("btStop"))
+            {
+                sendMessage("VIDEO_STOP");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            sendMessage(textBox1.Text);
+        }
+
     }
 }

@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="lib\Client.cs" />
+    <Compile Include="lib\Listener.cs" />
     <Compile Include="MainSystemManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,7 +1,9 @@
 ﻿using hnSystemManager.src;
 using hnSystemManager.src.util;
+using Jerrryfighter.MultipleSocket;
 using System;
 using System.IO;
+using System.Net.Sockets;
 using System.Windows.Forms;
 using static hnSystemManager.src.xmlDataConfig;
 
@@ -16,27 +18,10 @@ namespace hnSystemManager
         static MainSystemManagerForm mMainSystemManagerForm;
         static NetworkSystemProcess mNetworkSystemProcess;
         static NetworkSystemProcess mNetworkManagerSystemProcess;
+        static Listener listener = null;
 
         private const string configFileName = "/SystemManager.xml";
         private static networkTestUtil ntTest;
-
-        class networkTestEntry
-        {
-            internal bool networkTestResult;
-            internal bool networkPortTestResult;
-            internal bool networkApplicationTestResult;
-            internal ClientCommunication client;
-
-            internal void stopClient()
-            {
-                if(client != null)
-                {
-                    client.StopClient();
-                }
-            }
-        }
-
-        private static networkTestEntry[] ntEntry;
 
         [STAThread]
         static void Main()
@@ -56,28 +41,34 @@ namespace hnSystemManager
 
             mLogProc = new LogProcess(gXMLDataConfig.mSystemManager.saveLogfile, mMainSystemManagerForm);
 
-            ntEntry = new networkTestEntry[gXMLDataConfig.NetworkSystem.Length];
+            listener = new Listener(gXMLDataConfig.mSystemManager.NetworkManagerServerPort);
+            listener.SocketAccepted += new Listener.SocketAcceptedHandler(listener_SocketAccepted);
 
-            for (int i = 0; i < gXMLDataConfig.NetworkSystem.Length; i++)
-            {
-                ntEntry[i] = new networkTestEntry();
-                ntEntry[i].client = new ClientCommunication(true, gXMLDataConfig.mSystemManager.socketTimeout);
-            }
-
-            if (gXMLDataConfig.mSystemManager.NetworkManagerServerMode)
-            {
-                mNetworkManagerSystemProcess = new NetworkSystemProcess(mMainSystemManagerForm,
-                    gXMLDataConfig.mSystemManager.NetworkManagerServerPort);
-                mNetworkManagerSystemProcess.startServer();
-                mNetworkManagerSystemProcess.NetworkDataReceivedHandler += NetworkManagerDataReceivedHandler;
-            }
-            else
-            {
-                mMainSystemManagerForm.InitializeNetwork();
-            }
+            listener.Start("0.0.0.0");
 
             mLogProc.DebugLog("System Start");
             Application.Run(mMainSystemManagerForm);
+        }
+
+        private static void listener_SocketAccepted(Socket e)
+        {
+            Client client = new Client(e);
+            client.Received += new Client.ClientReceivedHandler(client_Received);
+            client.Disconnected += new Client.ClientDisconnectedHandler(client_Disconnected);
+
+            mMainSystemManagerForm.ListenerAccepted(client, e.Handle.ToString());
+
+        }
+
+        private static void client_Received(Client sender, byte[] data)
+        {
+            mMainSystemManagerForm.ListenerRecevied(sender, data);
+
+        }
+
+        private static void client_Disconnected(Client sender)
+        {
+            mMainSystemManagerForm.ListenerDisconnect(sender);
         }
 
         private static void NetworkManagerDataReceivedHandler(string Data)
@@ -136,144 +127,11 @@ namespace hnSystemManager
                 mLogProc.DebugLog("Remote Control Server Stop");
             }
 
-            foreach(networkTestEntry ntClient in ntEntry)
-            {
-                ntClient.stopClient();
-            }
-
             mLogProc.DebugLog("System Shutdown");
 
             Application.ExitThread();
             Environment.Exit(0);
         }
 
-        /**
-         * System Client ICMP Test
-         * Argument: index - Systme Client Index
-         */
-        internal static bool systemClientICMPTest(int index)
-        {
-            string ipAddress;
-            bool resultICMP = false ;
-
-            if (GetXmlDataConfig().NetworkSystem.Length < index)
-                return false;
-
-            NetworkSystemEntry nsE = GetXmlDataConfig().NetworkSystem[index];
-
-            if (nsE != null)
-            {
-                ipAddress = nsE.NetworkAddress;
-                resultICMP = ntTest.testICMP(ipAddress);
-            }
-
-            ntEntry[index].networkTestResult = resultICMP;
-
-            return resultICMP;
-        }
-
-        /**
-         * System Client Entry Port Scan function 
-         * Argument: index - Systme Client Index
-         */
-        internal static bool systemClientPortScan(int index)
-        {
-            string ipAddress;
-            int port;
-            bool resultPortScan= false;
-
-            if (GetXmlDataConfig().NetworkSystem.Length < index)
-            {
-                ntEntry[index].networkPortTestResult = false;
-                return false;
-            }
-
-            NetworkSystemEntry nsE = GetXmlDataConfig().NetworkSystem[index];
-
-            if (nsE != null)
-            {
-                ipAddress = nsE.NetworkAddress;
-                port = nsE.port;
-                resultPortScan = ntTest.ConnectTest(ipAddress, port);
-            }
-
-            ntEntry[index].networkPortTestResult = resultPortScan;
-
-            return resultPortScan;
-        }
-
-        /**
-         * System Client Entry Scan function 
-         * Argument: index - Systme Client Index
-         */
-        internal static bool systemClientScan(int index)
-        {
-            string ipAddress;
-            int port;
-            bool resultClientScan = false;
-
-            if (GetXmlDataConfig().NetworkSystem.Length < index)
-            {
-                ntEntry[index].networkApplicationTestResult = false;
-                return false;
-            }
-
-            NetworkSystemEntry nsE = GetXmlDataConfig().NetworkSystem[index];
-
-            if (nsE != null)
-            {
-                ipAddress = nsE.NetworkAddress;
-                port = nsE.port;
-                resultClientScan = ntEntry[index].client.StartClient(ipAddress, port);
-            }
-
-            ntEntry[index].networkApplicationTestResult = resultClientScan;
-            return resultClientScan;
-        }
-
-        /**
-         * System Client Entry Command function 
-         * Argument: index - Systme Client Index
-         *           command - System Command
-         */
-        internal static bool sendSystemCommand(int index, string command)
-        {
-            string ipAddress;
-            int port;
-            bool resultClientScan = false;
-
-            if (GetXmlDataConfig().NetworkSystem.Length < index)
-            {
-                ntEntry[index].networkApplicationTestResult = false;
-                return false;
-            }
-
-            NetworkSystemEntry nsE = GetXmlDataConfig().NetworkSystem[index];
-
-            if (nsE != null)
-            {
-                ipAddress = nsE.NetworkAddress;
-                port = nsE.port;
-                resultClientScan = ntEntry[index].client.Send(command + "\n");
-            }
-
-            return resultClientScan;
-        }
-
-        /**
-         * System Client Entry Connection Check function 
-         * Argument: index - Systme Client Index
-         */
-        internal static bool getSystemConnectionClient(int index)
-        {
-            if(ntEntry[index].networkTestResult == true &&
-                ntEntry[index].networkPortTestResult == true &&
-                ntEntry[index].networkApplicationTestResult == true)
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }
