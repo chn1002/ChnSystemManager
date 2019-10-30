@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\CustomPanel.cs" />
     <Compile Include="src\LogProcess.cs" />
     <Compile Include="src\NetworkSystemProcess.cs" />
     <Compile Include="src\util\ClientCommunication.cs" />

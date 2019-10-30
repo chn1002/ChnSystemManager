@@ -40,7 +40,15 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DisplayPanel = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ControlPanel = new System.Windows.Forms.Panel();
+            this.lbInformation = new System.Windows.Forms.Label();
+            this.btPause = new System.Windows.Forms.Button();
+            this.btStop = new System.Windows.Forms.Button();
+            this.btVideoIntro = new System.Windows.Forms.Button();
+            this.btVideoMain = new System.Windows.Forms.Button();
+            this.btPlay = new System.Windows.Forms.Button();
+            this.btIdle = new System.Windows.Forms.Button();
             this.lbSerivceType = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -49,13 +57,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.btIdle = new System.Windows.Forms.Button();
-            this.btPlay = new System.Windows.Forms.Button();
-            this.btVideoMain = new System.Windows.Forms.Button();
-            this.btVideoIntro = new System.Windows.Forms.Button();
-            this.btStop = new System.Windows.Forms.Button();
-            this.btPause = new System.Windows.Forms.Button();
-            this.lbInformation = new System.Windows.Forms.Label();
             this.ctMenuStripTray.SuspendLayout();
             this.DisplayPanel.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -132,11 +133,30 @@
             // 
             // DisplayPanel
             // 
+            this.DisplayPanel.Controls.Add(this.tableLayoutPanel1);
             this.DisplayPanel.Controls.Add(this.listView1);
             this.DisplayPanel.Location = new System.Drawing.Point(0, 105);
             this.DisplayPanel.Name = "DisplayPanel";
             this.DisplayPanel.Size = new System.Drawing.Size(912, 339);
             this.DisplayPanel.TabIndex = 1;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, -3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(912, 344);
+            this.tableLayoutPanel1.TabIndex = 4;
             // 
             // ControlPanel
             // 
@@ -157,6 +177,75 @@
             this.ControlPanel.Name = "ControlPanel";
             this.ControlPanel.Size = new System.Drawing.Size(912, 100);
             this.ControlPanel.TabIndex = 2;
+            // 
+            // lbInformation
+            // 
+            this.lbInformation.AutoSize = true;
+            this.lbInformation.Location = new System.Drawing.Point(579, 9);
+            this.lbInformation.Name = "lbInformation";
+            this.lbInformation.Size = new System.Drawing.Size(67, 12);
+            this.lbInformation.TabIndex = 10;
+            this.lbInformation.Text = "Information";
+            // 
+            // btPause
+            // 
+            this.btPause.Location = new System.Drawing.Point(338, 39);
+            this.btPause.Name = "btPause";
+            this.btPause.Size = new System.Drawing.Size(75, 23);
+            this.btPause.TabIndex = 9;
+            this.btPause.Text = "Pause";
+            this.btPause.UseVisualStyleBackColor = true;
+            this.btPause.Click += new System.EventHandler(this.button_Click);
+            // 
+            // btStop
+            // 
+            this.btStop.Location = new System.Drawing.Point(419, 39);
+            this.btStop.Name = "btStop";
+            this.btStop.Size = new System.Drawing.Size(75, 23);
+            this.btStop.TabIndex = 8;
+            this.btStop.Text = "Stop";
+            this.btStop.UseVisualStyleBackColor = true;
+            this.btStop.Click += new System.EventHandler(this.button_Click);
+            // 
+            // btVideoIntro
+            // 
+            this.btVideoIntro.Location = new System.Drawing.Point(95, 39);
+            this.btVideoIntro.Name = "btVideoIntro";
+            this.btVideoIntro.Size = new System.Drawing.Size(75, 23);
+            this.btVideoIntro.TabIndex = 7;
+            this.btVideoIntro.Text = "Video Intro";
+            this.btVideoIntro.UseVisualStyleBackColor = true;
+            this.btVideoIntro.Click += new System.EventHandler(this.button_Click);
+            // 
+            // btVideoMain
+            // 
+            this.btVideoMain.Location = new System.Drawing.Point(176, 39);
+            this.btVideoMain.Name = "btVideoMain";
+            this.btVideoMain.Size = new System.Drawing.Size(75, 23);
+            this.btVideoMain.TabIndex = 6;
+            this.btVideoMain.Text = "VideoMain";
+            this.btVideoMain.UseVisualStyleBackColor = true;
+            this.btVideoMain.Click += new System.EventHandler(this.button_Click);
+            // 
+            // btPlay
+            // 
+            this.btPlay.Location = new System.Drawing.Point(257, 39);
+            this.btPlay.Name = "btPlay";
+            this.btPlay.Size = new System.Drawing.Size(75, 23);
+            this.btPlay.TabIndex = 5;
+            this.btPlay.Text = "Play";
+            this.btPlay.UseVisualStyleBackColor = true;
+            this.btPlay.Click += new System.EventHandler(this.button_Click);
+            // 
+            // btIdle
+            // 
+            this.btIdle.Location = new System.Drawing.Point(14, 39);
+            this.btIdle.Name = "btIdle";
+            this.btIdle.Size = new System.Drawing.Size(75, 23);
+            this.btIdle.TabIndex = 4;
+            this.btIdle.Text = "IDLE";
+            this.btIdle.UseVisualStyleBackColor = true;
+            this.btIdle.Click += new System.EventHandler(this.button_Click);
             // 
             // lbSerivceType
             // 
@@ -218,75 +307,6 @@
             this.listBox1.Size = new System.Drawing.Size(906, 110);
             this.listBox1.TabIndex = 0;
             // 
-            // btIdle
-            // 
-            this.btIdle.Location = new System.Drawing.Point(14, 39);
-            this.btIdle.Name = "btIdle";
-            this.btIdle.Size = new System.Drawing.Size(75, 23);
-            this.btIdle.TabIndex = 4;
-            this.btIdle.Text = "IDLE";
-            this.btIdle.UseVisualStyleBackColor = true;
-            this.btIdle.Click += new System.EventHandler(this.button_Click);
-            // 
-            // btPlay
-            // 
-            this.btPlay.Location = new System.Drawing.Point(257, 39);
-            this.btPlay.Name = "btPlay";
-            this.btPlay.Size = new System.Drawing.Size(75, 23);
-            this.btPlay.TabIndex = 5;
-            this.btPlay.Text = "Play";
-            this.btPlay.UseVisualStyleBackColor = true;
-            this.btPlay.Click += new System.EventHandler(this.button_Click);
-            // 
-            // btVideoMain
-            // 
-            this.btVideoMain.Location = new System.Drawing.Point(176, 39);
-            this.btVideoMain.Name = "btVideoMain";
-            this.btVideoMain.Size = new System.Drawing.Size(75, 23);
-            this.btVideoMain.TabIndex = 6;
-            this.btVideoMain.Text = "VideoMain";
-            this.btVideoMain.UseVisualStyleBackColor = true;
-            this.btVideoMain.Click += new System.EventHandler(this.button_Click);
-            // 
-            // btVideoIntro
-            // 
-            this.btVideoIntro.Location = new System.Drawing.Point(95, 39);
-            this.btVideoIntro.Name = "btVideoIntro";
-            this.btVideoIntro.Size = new System.Drawing.Size(75, 23);
-            this.btVideoIntro.TabIndex = 7;
-            this.btVideoIntro.Text = "Video Intro";
-            this.btVideoIntro.UseVisualStyleBackColor = true;
-            this.btVideoIntro.Click += new System.EventHandler(this.button_Click);
-            // 
-            // btStop
-            // 
-            this.btStop.Location = new System.Drawing.Point(419, 39);
-            this.btStop.Name = "btStop";
-            this.btStop.Size = new System.Drawing.Size(75, 23);
-            this.btStop.TabIndex = 8;
-            this.btStop.Text = "Stop";
-            this.btStop.UseVisualStyleBackColor = true;
-            this.btStop.Click += new System.EventHandler(this.button_Click);
-            // 
-            // btPause
-            // 
-            this.btPause.Location = new System.Drawing.Point(338, 39);
-            this.btPause.Name = "btPause";
-            this.btPause.Size = new System.Drawing.Size(75, 23);
-            this.btPause.TabIndex = 9;
-            this.btPause.Text = "Pause";
-            this.btPause.UseVisualStyleBackColor = true;
-            this.btPause.Click += new System.EventHandler(this.button_Click);
-            // 
-            // lbInformation
-            // 
-            this.lbInformation.AutoSize = true;
-            this.lbInformation.Location = new System.Drawing.Point(579, 9);
-            this.lbInformation.Name = "lbInformation";
-            this.lbInformation.Size = new System.Drawing.Size(67, 12);
-            this.lbInformation.TabIndex = 10;
-            this.lbInformation.Text = "Information";
-            // 
             // MainSystemManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -336,6 +356,7 @@
         private System.Windows.Forms.Button btPlay;
         private System.Windows.Forms.Button btIdle;
         private System.Windows.Forms.Label lbInformation;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 

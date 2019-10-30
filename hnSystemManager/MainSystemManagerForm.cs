@@ -1,6 +1,8 @@
-﻿using hnSystemManager.src.util;
+﻿using hnSystemManager.src;
+using hnSystemManager.src.util;
 using Jerrryfighter.MultipleSocket;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Text;
@@ -11,9 +13,12 @@ namespace hnSystemManager
 {
     public partial class MainSystemManagerForm : Form
     {
+        List<CustomPanel> mCustomPanel;
+
         public MainSystemManagerForm()
         {
             InitializeComponent();
+            mCustomPanel = new List<CustomPanel>();
 
             lbSerivceType.Text = "Service Type: Server Mode";
             updateInformation();
@@ -35,6 +40,7 @@ namespace hnSystemManager
                     if (client.ID == sender.ID)
                     {
                         listView1.Items.RemoveAt(i);
+                        delTable(i);
                         break;
                     }
                 }
@@ -56,12 +62,62 @@ namespace hnSystemManager
                 item.Tag = client;
                 listView1.Items.Add(item);
 
+                addTable(item);
                 updateInformation();
             });
         }
 
+        private void addTable(ListViewItem liItem)
+        {
+            int customPanelIndex = mCustomPanel.Count;
+            int iRowIdx = 0;
+            int iColIdx = 0;
+            CustomPanel cPanel = new CustomPanel();
+
+            iColIdx = customPanelIndex % 5;
+            iRowIdx = customPanelIndex / 5;
+
+            cPanel.setData(liItem);
+            TableLayoutPanelCellPosition cp = new TableLayoutPanelCellPosition(iColIdx, iRowIdx);
+            tableLayoutPanel1.Controls.Add(cPanel.getPanel());
+            tableLayoutPanel1.SetCellPosition(cPanel.getPanel(), cp);
+
+            mCustomPanel.Add(cPanel);
+        }
+
+        private void delTable(int idx)
+        {
+            int iRowIdx = 0;
+            int iColIdx = 0;
+
+            tableLayoutPanel1.Controls.Clear();
+            mCustomPanel.Clear();
+
+            for (int index = 0; index < listView1.Items.Count; index++)
+            {
+                CustomPanel cPanel = new CustomPanel();
+
+                iColIdx = index % 5;
+                iRowIdx = index / 5;
+
+                cPanel.setData(listView1.Items[index]);
+                TableLayoutPanelCellPosition cp = new TableLayoutPanelCellPosition(iColIdx, iRowIdx);
+                tableLayoutPanel1.Controls.Add(cPanel.getPanel());
+                tableLayoutPanel1.SetCellPosition(cPanel.getPanel(), cp);
+
+                mCustomPanel.Add(cPanel);
+            }
+        }
+
+        private void updateTable(int index, string message)
+        {
+            mCustomPanel[index].setMessage(message);
+        }
+
         internal void ListenerRecevied(Client sender, byte[] data)
         {
+            string message = null;
+
             Invoke((MethodInvoker)delegate
             {
                 for (int i = 0; i < listView1.Items.Count; i++)
@@ -70,8 +126,11 @@ namespace hnSystemManager
 
                     if (client.ID == sender.ID)
                     {
-                        listView1.Items[i].SubItems[2].Text = Encoding.UTF8.GetString(data, 0, data.Length);
+                        message = Encoding.UTF8.GetString(data, 0, data.Length);
+                        listView1.Items[i].SubItems[2].Text = message;
                         listView1.Items[i].SubItems[3].Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                        updateTable(i, message);
                         break;
                     }
                 }
