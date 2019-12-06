@@ -70,18 +70,41 @@ namespace hnSystemManager
 
         private void statueTh()
         {
+            int sleepTime = 1000;
+            int counter = 0;
+
             while (isTheadRun)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(sleepTime);
 
                 switch (mStatus)
                 {
                     case statusMechine.IDLE:
                         break;
+                    case statusMechine.STATUS_MAIN_VIDEO_WAIT:
+                        if(counter < 3)
+                        {
+                            for(int index =0; index < listView1.Items.Count; index++)
+                            {
+                                statusMechine stM = (statusMechine) Enum.Parse(typeof(statusMechine), mCustomPanel[index].getStatus());
+                                Program.mLogProc.DebugLog("Test : " + stM.ToString());
+                                sendSingleMessage("VIDEO_MAIN", index);
+                            }
+
+                            counterMainVideoPrepare = 0;
+                        }
+                        else
+                        {
+                            Program.mLogProc.DebugLog("Load Error");
+                        }
+                        counter++;
+
+                        break;
                     case statusMechine.STATUS_MAIN_VIDEO_PLAY:
                         eventProcess("btPlay");
                         mStatus = statusMechine.STATUS_MAIN_VIDEO_PLAYING;
                         counterMainVideoPrepare = 0;
+                        counter = 0;
                         break;
                     case statusMechine.STATUS_INTRO_VIDEO_WAIT:
                         {
@@ -181,6 +204,14 @@ namespace hnSystemManager
                 iRowIdx = index / 5;
 
                 cPanel.setData(listView1.Items[index]);
+                if(mStatus == statusMechine.STATUS_MAIN_VIDEO_PLAY)
+                {
+                    cPanel.getPanel().BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    cPanel.getPanel().BackColor = Color.Orange;
+                }
                 TableLayoutPanelCellPosition cp = new TableLayoutPanelCellPosition(iColIdx, iRowIdx);
                 tableLayoutPanel1.Controls.Add(cPanel.getPanel());
                 tableLayoutPanel1.SetCellPosition(cPanel.getPanel(), cp);
@@ -238,6 +269,7 @@ namespace hnSystemManager
             {
             }
 
+            mCustomPanel[index].setStatus(mStatus.ToString());
             mCustomPanel[index].setMessage(message);
         }
 
