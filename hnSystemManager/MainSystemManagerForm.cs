@@ -4,8 +4,10 @@ using Jerrryfighter.MultipleSocket;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using static hnSystemManager.src.xmlDataConfig;
 
@@ -15,13 +17,81 @@ namespace hnSystemManager
     {
         List<CustomPanel> mCustomPanel;
 
+        private readonly string DEVICENAME = "DEVICENAME";
+        private readonly char[] SPLIT_CHAR = { '|' ,};
+
+        private readonly string INTRO_VIDEO_PREPARE = "Video Intro Prepare";
+        private readonly string INTRO_VIDEO_PLAY = "Intro Video Stop";
+        private readonly string INTRO_VIDEO_STOP = "Intro Video Stop";
+        private readonly string INTRO_VIDEO_PAUSE = "Intro Video Pause";
+
+        private readonly string MAIN_VIDEO_PREPARE = "Video Main Prepare";
+        private readonly string MAIN_VIDEO_PLAY = "Main Video Play";
+        private readonly string MAIN_VIDEO_STOP = "Main Video Stop";
+        private readonly string MAIN_VIDEO_PAUSE = "Main Video Pause";
+
+        private Thread statusThread;
+        private bool isTheadRun = false;
+
+        private int counterMainVideoPrepare;
+
+        enum statusMechine
+        {
+            IDLE,
+            STATUS_INTRO_VIDEO_WAIT,
+            STATUS_INTRO_VIDEO_PLAY,
+            STATUS_MAIN_VIDEO_WAIT,
+            STATUS_MAIN_VIDEO_PLAY,
+            STATUS_MAIN_VIDEO_PLAYING,
+            END
+        }
+
+        statusMechine mStatus;
+
         public MainSystemManagerForm()
         {
             InitializeComponent();
             mCustomPanel = new List<CustomPanel>();
 
-            lbSerivceType.Text = "Service Type: Server Mode";
+            if(Program.GetXmlDataConfig().mSystemManager.userUI)
+            {
+                tableLayoutPanel1.Visible = true;
+            }
+
             updateInformation();
+
+            statusThread = new Thread(statueTh);
+            statusThread.IsBackground = true;
+            isTheadRun = true;
+            statusThread.Start();
+
+            mStatus = statusMechine.IDLE;
+        }
+
+        private void statueTh()
+        {
+            while (isTheadRun)
+            {
+                Thread.Sleep(1000);
+
+                switch (mStatus)
+                {
+                    case statusMechine.IDLE:
+                        break;
+                    case statusMechine.STATUS_MAIN_VIDEO_PLAY:
+                        eventProcess("btPlay");
+                        mStatus = statusMechine.STATUS_MAIN_VIDEO_PLAYING;
+                        counterMainVideoPrepare = 0;
+                        break;
+                    case statusMechine.STATUS_INTRO_VIDEO_WAIT:
+                        {
+
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         internal void writeDebug(string log)
@@ -73,16 +143,26 @@ namespace hnSystemManager
             int iRowIdx = 0;
             int iColIdx = 0;
             CustomPanel cPanel = new CustomPanel();
+            cPanel.Index = customPanelIndex;
 
-            iColIdx = customPanelIndex % 5;
-            iRowIdx = customPanelIndex / 5;
+            iColIdx = customPanelIndex % 10;
+            iRowIdx = customPanelIndex / 10;
 
             cPanel.setData(liItem);
+            cPanel.getPanel().BackColor = Color.Orange;
+            cPanel.setVideoType("대기 영상");
+            cPanel.getButton().Name = customPanelIndex.ToString();
+            cPanel.getButton().Click += new System.EventHandler(this.btSingleEventHandler);
             TableLayoutPanelCellPosition cp = new TableLayoutPanelCellPosition(iColIdx, iRowIdx);
             tableLayoutPanel1.Controls.Add(cPanel.getPanel());
             tableLayoutPanel1.SetCellPosition(cPanel.getPanel(), cp);
 
             mCustomPanel.Add(cPanel);
+        }
+
+        private EventHandler singleEventHandler()
+        {
+            throw new NotImplementedException();
         }
 
         private void delTable(int idx)
@@ -109,8 +189,55 @@ namespace hnSystemManager
             }
         }
 
+        private void updateName(int index, string name)
+        {
+            mCustomPanel[index].setName(name);
+        }
+
         private void updateTable(int index, string message)
         {
+            if(message.Contains(MAIN_VIDEO_PREPARE))
+            {
+                counterMainVideoPrepare++;
+                Program.mLogProc.DebugLog("Test : " + counterMainVideoPrepare);
+
+                if (counterMainVideoPrepare == listView1.Items.Count)
+                {
+                    mStatus = statusMechine.STATUS_MAIN_VIDEO_PLAY;
+                    Program.mp3Play();
+                }
+                mCustomPanel[index].setVideoType("메인 영상");
+                mCustomPanel[index].getPanel().BackColor = Color.Orange;
+            }
+            else if(message.Contains(MAIN_VIDEO_PLAY))
+            {
+                if(mCustomPanel[index].getPanel().BackColor != Color.LightGreen)
+                    mCustomPanel[index].getPanel().BackColor = Color.LightGreen;
+            }
+            else if (message.Contains(MAIN_VIDEO_STOP))
+            {
+                Program.getMediaPlayer().Stop();
+            }
+            else if (message.Contains(MAIN_VIDEO_PAUSE))
+            {
+                Program.getMediaPlayer().Pause();
+            }
+            else if (message.Contains(INTRO_VIDEO_PREPARE))
+            {
+                mCustomPanel[index].setVideoType("대기 영상");
+                mCustomPanel[index].getPanel().BackColor = Color.Orange;
+                Program.getMediaPlayer().Stop();
+            }
+            else if (message.Contains(INTRO_VIDEO_PLAY))
+            {
+            }
+            else if (message.Contains(INTRO_VIDEO_STOP))
+            {
+            }
+            else if (message.Contains(INTRO_VIDEO_PAUSE))
+            {
+            }
+
             mCustomPanel[index].setMessage(message);
         }
 
@@ -127,10 +254,19 @@ namespace hnSystemManager
                     if (client.ID == sender.ID)
                     {
                         message = Encoding.UTF8.GetString(data, 0, data.Length);
+
+                        string[] command = message.Split(SPLIT_CHAR);
+                        if (command[0].Equals(DEVICENAME))
+                        {
+                            updateName(i, command[1]);
+                        }
+                        else
+                        {
+                            updateTable(i, message);
+                        }
+
                         listView1.Items[i].SubItems[2].Text = message;
                         listView1.Items[i].SubItems[3].Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-                        updateTable(i, message);
                         break;
                     }
                 }
@@ -200,6 +336,10 @@ namespace hnSystemManager
                     client.Close();
             }
 
+            if (statusThread != null)
+                statusThread.Abort();
+
+            isTheadRun = false;
             Program.systemShutdown();
         }
 
@@ -231,8 +371,6 @@ namespace hnSystemManager
 
         private void sendMessage(String message)
         {
-            Program.mLogProc.DebugLog("Test : " + message);
-
             Invoke((MethodInvoker)delegate
             {
                 for (int i = 0; i < listView1.Items.Count; i++)
@@ -245,41 +383,82 @@ namespace hnSystemManager
             });
         }
 
+        private void sendSingleMessage(String message, int index)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                for (int i = 0; i < listView1.Items.Count; i++)
+                {
+                    if(i == index)
+                    {
+                        Client client = listView1.Items[i].Tag as Client;
+
+                        if (client.sck.Connected)
+                            client.SendMessage(Encoding.UTF8.GetBytes(message));
+                    }
+                }
+            });
+        }
+
+
         private void updateInformation()
         {
-            lbInformation.Text = "Client Number: " + listView1.Items.Count;
+            lbInformation.Text = "접속 기기 수 : " + listView1.Items.Count;
         }
 
         private void button_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             String name = button.Name;
+            eventProcess(name);
+        }
 
+        private void eventProcess(string name)
+        {
             if (name.Equals("btIdle"))
             {
                 sendMessage("IDLE");
-            } else if (name.Equals("btVideoIntro"))
+            }
+            else if (name.Equals("btVideoIntro"))
             {
                 sendMessage("VIDEO_INTRO");
-            } else if (name.Equals("btVideoMain"))
+                counterMainVideoPrepare = 0;
+            }
+            else if (name.Equals("btVideoMain"))
             {
                 sendMessage("VIDEO_MAIN");
-            } else if (name.Equals("btPlay"))
+                mStatus = statusMechine.STATUS_MAIN_VIDEO_WAIT;
+            }
+            else if (name.Equals("btPlay"))
             {
                 sendMessage("VIDEO_PLAY");
-            } else if (name.Equals("btPause"))
+            }
+            else if (name.Equals("btPause"))
             {
                 sendMessage("VIDEO_PAUSE");
-            } else if (name.Equals("btStop"))
+                Program.getMediaPlayer().Pause();
+            }
+            else if (name.Equals("btStop"))
             {
                 sendMessage("VIDEO_STOP");
+                Program.getMediaPlayer().Stop();
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        internal void runMP3()
         {
-            sendMessage(textBox1.Text);
+            Invoke((MethodInvoker)delegate
+            {
+                Program.mp3Play();
+            });
         }
 
+        private void btSingleEventHandler(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int index = int.Parse(button.Name);
+
+            sendSingleMessage("VIDEO_PMAIN", index);
+        }
     }
 }

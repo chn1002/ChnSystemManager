@@ -57,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\CustomPanel.cs" />
     <Compile Include="src\LogProcess.cs" />
+    <Compile Include="src\MediaControl.cs" />
     <Compile Include="src\NetworkSystemProcess.cs" />
     <Compile Include="src\util\ClientCommunication.cs" />
     <Compile Include="src\util\networkTestUtil.cs" />
@@ -68,13 +69,14 @@
       <DependentUpon>MainSystemManagerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -89,13 +91,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="res\abc_ic_star_black_16dp.png" />
-    <Content Include="res\flock_ico01.ico" />
-    <Content Include="res\flock_ico02.ico" />
-    <Content Include="res\flock_ico03.ico" />
-    <Content Include="res\flock_ico04.ico" />
+    <EmbeddedResource Include="Resources\favorite.png" />
+    <EmbeddedResource Include="Resources\sale.png" />
+    <EmbeddedResource Include="Resources\wallet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="res\abc_ic_star_black_16dp.png" />
+    <EmbeddedResource Include="res\flock_ico01.ico" />
+    <EmbeddedResource Include="res\flock_ico02.ico" />
+    <EmbeddedResource Include="res\flock_ico03.ico" />
+    <EmbeddedResource Include="res\flock_ico04.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

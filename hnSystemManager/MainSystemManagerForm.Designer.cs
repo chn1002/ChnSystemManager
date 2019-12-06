@@ -48,8 +48,6 @@
             this.btVideoIntro = new System.Windows.Forms.Button();
             this.btVideoMain = new System.Windows.Forms.Button();
             this.btPlay = new System.Windows.Forms.Button();
-            this.btIdle = new System.Windows.Forms.Button();
-            this.lbSerivceType = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -57,6 +55,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.lbEmergency = new System.Windows.Forms.Label();
             this.ctMenuStripTray.SuspendLayout();
             this.DisplayPanel.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -73,6 +72,7 @@
             // 
             // ctMenuStripTray
             // 
+            this.ctMenuStripTray.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ctMenuStripTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.종료ToolStripMenuItem});
             this.ctMenuStripTray.Name = "ctMenuStripTray";
@@ -98,7 +98,7 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(912, 339);
+            this.listView1.Size = new System.Drawing.Size(1546, 487);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -133,166 +133,170 @@
             // 
             // DisplayPanel
             // 
+            this.DisplayPanel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.DisplayPanel.Controls.Add(this.tableLayoutPanel1);
             this.DisplayPanel.Controls.Add(this.listView1);
             this.DisplayPanel.Location = new System.Drawing.Point(0, 105);
             this.DisplayPanel.Name = "DisplayPanel";
-            this.DisplayPanel.Size = new System.Drawing.Size(912, 339);
+            this.DisplayPanel.Size = new System.Drawing.Size(1546, 487);
             this.DisplayPanel.TabIndex = 1;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, -3);
+            this.tableLayoutPanel1.AutoScroll = true;
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Window;
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel1.ColumnCount = 10;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(912, 344);
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1546, 487);
             this.tableLayoutPanel1.TabIndex = 4;
+            this.tableLayoutPanel1.Visible = false;
             // 
             // ControlPanel
             // 
             this.ControlPanel.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.ControlPanel.Controls.Add(this.lbEmergency);
             this.ControlPanel.Controls.Add(this.lbInformation);
             this.ControlPanel.Controls.Add(this.btPause);
             this.ControlPanel.Controls.Add(this.btStop);
             this.ControlPanel.Controls.Add(this.btVideoIntro);
             this.ControlPanel.Controls.Add(this.btVideoMain);
             this.ControlPanel.Controls.Add(this.btPlay);
-            this.ControlPanel.Controls.Add(this.btIdle);
-            this.ControlPanel.Controls.Add(this.lbSerivceType);
             this.ControlPanel.Controls.Add(this.checkBox1);
             this.ControlPanel.Controls.Add(this.button1);
             this.ControlPanel.Controls.Add(this.textBox1);
             this.ControlPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ControlPanel.Location = new System.Drawing.Point(0, 0);
             this.ControlPanel.Name = "ControlPanel";
-            this.ControlPanel.Size = new System.Drawing.Size(912, 100);
+            this.ControlPanel.Size = new System.Drawing.Size(1549, 99);
             this.ControlPanel.TabIndex = 2;
             // 
             // lbInformation
             // 
             this.lbInformation.AutoSize = true;
-            this.lbInformation.Location = new System.Drawing.Point(579, 9);
+            this.lbInformation.Font = new System.Drawing.Font("굴림", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbInformation.Location = new System.Drawing.Point(348, 39);
             this.lbInformation.Name = "lbInformation";
-            this.lbInformation.Size = new System.Drawing.Size(67, 12);
+            this.lbInformation.Size = new System.Drawing.Size(110, 20);
             this.lbInformation.TabIndex = 10;
             this.lbInformation.Text = "Information";
             // 
             // btPause
             // 
-            this.btPause.Location = new System.Drawing.Point(338, 39);
+            this.btPause.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btPause.Location = new System.Drawing.Point(1299, 32);
             this.btPause.Name = "btPause";
             this.btPause.Size = new System.Drawing.Size(75, 23);
             this.btPause.TabIndex = 9;
-            this.btPause.Text = "Pause";
+            this.btPause.Text = "일시정지";
             this.btPause.UseVisualStyleBackColor = true;
             this.btPause.Click += new System.EventHandler(this.button_Click);
             // 
             // btStop
             // 
-            this.btStop.Location = new System.Drawing.Point(419, 39);
+            this.btStop.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btStop.Location = new System.Drawing.Point(1380, 32);
             this.btStop.Name = "btStop";
             this.btStop.Size = new System.Drawing.Size(75, 23);
             this.btStop.TabIndex = 8;
-            this.btStop.Text = "Stop";
+            this.btStop.Text = "멈춤";
             this.btStop.UseVisualStyleBackColor = true;
             this.btStop.Click += new System.EventHandler(this.button_Click);
             // 
             // btVideoIntro
             // 
-            this.btVideoIntro.Location = new System.Drawing.Point(95, 39);
+            this.btVideoIntro.BackColor = System.Drawing.Color.Orange;
+            this.btVideoIntro.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btVideoIntro.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btVideoIntro.Location = new System.Drawing.Point(14, 9);
             this.btVideoIntro.Name = "btVideoIntro";
-            this.btVideoIntro.Size = new System.Drawing.Size(75, 23);
+            this.btVideoIntro.Size = new System.Drawing.Size(150, 80);
             this.btVideoIntro.TabIndex = 7;
-            this.btVideoIntro.Text = "Video Intro";
-            this.btVideoIntro.UseVisualStyleBackColor = true;
+            this.btVideoIntro.Text = "대기영상 이동버튼";
+            this.btVideoIntro.UseVisualStyleBackColor = false;
             this.btVideoIntro.Click += new System.EventHandler(this.button_Click);
             // 
             // btVideoMain
             // 
-            this.btVideoMain.Location = new System.Drawing.Point(176, 39);
+            this.btVideoMain.BackColor = System.Drawing.Color.LightGreen;
+            this.btVideoMain.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btVideoMain.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btVideoMain.Location = new System.Drawing.Point(170, 9);
             this.btVideoMain.Name = "btVideoMain";
-            this.btVideoMain.Size = new System.Drawing.Size(75, 23);
+            this.btVideoMain.Size = new System.Drawing.Size(150, 80);
             this.btVideoMain.TabIndex = 6;
-            this.btVideoMain.Text = "VideoMain";
-            this.btVideoMain.UseVisualStyleBackColor = true;
+            this.btVideoMain.Text = "메인영상 시작버튼";
+            this.btVideoMain.UseVisualStyleBackColor = false;
             this.btVideoMain.Click += new System.EventHandler(this.button_Click);
             // 
             // btPlay
             // 
-            this.btPlay.Location = new System.Drawing.Point(257, 39);
+            this.btPlay.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btPlay.Location = new System.Drawing.Point(1218, 32);
             this.btPlay.Name = "btPlay";
             this.btPlay.Size = new System.Drawing.Size(75, 23);
             this.btPlay.TabIndex = 5;
-            this.btPlay.Text = "Play";
+            this.btPlay.Text = "재생";
             this.btPlay.UseVisualStyleBackColor = true;
             this.btPlay.Click += new System.EventHandler(this.button_Click);
-            // 
-            // btIdle
-            // 
-            this.btIdle.Location = new System.Drawing.Point(14, 39);
-            this.btIdle.Name = "btIdle";
-            this.btIdle.Size = new System.Drawing.Size(75, 23);
-            this.btIdle.TabIndex = 4;
-            this.btIdle.Text = "IDLE";
-            this.btIdle.UseVisualStyleBackColor = true;
-            this.btIdle.Click += new System.EventHandler(this.button_Click);
-            // 
-            // lbSerivceType
-            // 
-            this.lbSerivceType.AutoSize = true;
-            this.lbSerivceType.Location = new System.Drawing.Point(12, 9);
-            this.lbSerivceType.Name = "lbSerivceType";
-            this.lbSerivceType.Size = new System.Drawing.Size(47, 12);
-            this.lbSerivceType.TabIndex = 3;
-            this.lbSerivceType.Text = "Service";
             // 
             // checkBox1
             // 
             this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(691, 73);
+            this.checkBox1.Location = new System.Drawing.Point(1263, 9);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(192, 16);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "Check All Client Connecttions";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(581, 64);
+            this.button1.Location = new System.Drawing.Point(1367, 61);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 32);
             this.button1.TabIndex = 1;
             this.button1.Text = "전송하기";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 68);
+            this.textBox1.Location = new System.Drawing.Point(507, 69);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(563, 21);
+            this.textBox1.Size = new System.Drawing.Size(845, 21);
             this.textBox1.TabIndex = 0;
+            this.textBox1.Visible = false;
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 452);
+            this.groupBox1.Location = new System.Drawing.Point(0, 598);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(912, 130);
+            this.groupBox1.Size = new System.Drawing.Size(1549, 130);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "삭제 된 클라이언트";
@@ -304,15 +308,25 @@
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(3, 17);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(906, 110);
+            this.listBox1.Size = new System.Drawing.Size(1543, 110);
             this.listBox1.TabIndex = 0;
+            // 
+            // lbEmergency
+            // 
+            this.lbEmergency.AutoSize = true;
+            this.lbEmergency.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbEmergency.Location = new System.Drawing.Point(1083, 37);
+            this.lbEmergency.Name = "lbEmergency";
+            this.lbEmergency.Size = new System.Drawing.Size(129, 14);
+            this.lbEmergency.TabIndex = 0;
+            this.lbEmergency.Text = "긴급상황 관리 버튼";
             // 
             // MainSystemManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(912, 582);
+            this.ClientSize = new System.Drawing.Size(1549, 728);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ControlPanel);
             this.Controls.Add(this.DisplayPanel);
@@ -322,6 +336,7 @@
             this.Load += new System.EventHandler(this.MainSystemManagerForm_Load);
             this.ctMenuStripTray.ResumeLayout(false);
             this.DisplayPanel.ResumeLayout(false);
+            this.DisplayPanel.PerformLayout();
             this.ControlPanel.ResumeLayout(false);
             this.ControlPanel.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -348,15 +363,14 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Label lbSerivceType;
         private System.Windows.Forms.Button btPause;
         private System.Windows.Forms.Button btStop;
         private System.Windows.Forms.Button btVideoIntro;
         private System.Windows.Forms.Button btVideoMain;
         private System.Windows.Forms.Button btPlay;
-        private System.Windows.Forms.Button btIdle;
         private System.Windows.Forms.Label lbInformation;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label lbEmergency;
     }
 }
 

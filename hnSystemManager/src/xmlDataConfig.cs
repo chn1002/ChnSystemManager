@@ -32,6 +32,8 @@ namespace hnSystemManager.src
                 saveLogfile = false;
                 NetworkManagerServerMode = true;
                 NetworkManagerServerPort = 55000;
+                userUI = true;
+                audioFile = "d:\\test_1.mp3";
             }
 
             [XmlElement("saveLogfile")]
@@ -48,6 +50,12 @@ namespace hnSystemManager.src
 
             [XmlElement("NetworkManagerServerPort")]
             public int NetworkManagerServerPort { get; set; }
+
+            [XmlElement("userUI")]
+            public bool userUI { get; set; }
+
+            [XmlElement("audioFile")]
+            public string audioFile { get; set; }
         }
     }
 }

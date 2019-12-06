@@ -18,3 +18,13 @@ D:\workspace\GitRepository\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemMa
 D:\workspace\GitRepository\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.exe
 D:\workspace\GitRepository\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.pdb
 D:\workspace\GitRepository\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.MainSystemManagerForm.resources
+D:\VS\ChnSystemManager\hnSystemManager\bin\Debug\hnSystemManager.exe.config
+D:\VS\ChnSystemManager\hnSystemManager\bin\Debug\hnSystemManager.exe
+D:\VS\ChnSystemManager\hnSystemManager\bin\Debug\hnSystemManager.pdb
+D:\VS\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.csprojAssemblyReference.cache
+D:\VS\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.MainSystemManagerForm.resources
+D:\VS\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.Properties.Resources.resources
+D:\VS\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.csproj.GenerateResource.cache
+D:\VS\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.csproj.CoreCompileInputs.cache
+D:\VS\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.exe
+D:\VS\ChnSystemManager\hnSystemManager\obj\Debug\hnSystemManager.pdb

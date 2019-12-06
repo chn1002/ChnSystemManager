@@ -4,6 +4,8 @@ using Jerrryfighter.MultipleSocket;
 using System;
 using System.IO;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 using static hnSystemManager.src.xmlDataConfig;
 
@@ -22,6 +24,15 @@ namespace hnSystemManager
 
         private const string configFileName = "/SystemManager.xml";
         private static networkTestUtil ntTest;
+
+
+        private static MediaControl mMediaControl;
+        [DllImport("winmm.dll")]
+        private static extern long mciSendString(string strCommand, StringBuilder strReturn, int iReturnLength, IntPtr hwndCallback);
+        [DllImport("winmm.dll")]
+        public static extern int mciGetErrorString(int errCode, StringBuilder errMsg, int buflen);
+
+        private static bool isOpenMP3 = false; 
 
         [STAThread]
         static void Main()
@@ -46,8 +57,58 @@ namespace hnSystemManager
 
             listener.Start("0.0.0.0");
 
+            mMediaControl = new MediaControl();
+            string url = gXMLDataConfig.mSystemManager.audioFile;
+
+            mMediaControl.Open(url);
+
             mLogProc.DebugLog("System Start");
             Application.Run(mMainSystemManagerForm);
+        }
+
+        public static MediaControl getMediaPlayer()
+        {
+            return mMediaControl;
+        }
+
+        public static void mp3Play()
+        {
+            if(!mMediaControl.isFileOpen())
+            {
+                string url = gXMLDataConfig.mSystemManager.audioFile;
+
+                mMediaControl.Open(url);
+                mLogProc.DebugLog("MP3 Play Open");
+            }
+
+            mMediaControl.Play(false);
+        }
+
+        public static void mp3Stop()
+        {
+            string commandString = "stop media";
+            mciSendString(commandString, null, 0, IntPtr.Zero);
+
+            mp3Close();
+        }
+
+        public static void mp3Pause()
+        {
+            string commandString = "pause media";
+
+            if (isOpenMP3)
+            {
+                mciSendString(commandString, null, 0, IntPtr.Zero);
+            }
+        }
+
+
+        public static void mp3Close()
+        {
+            string commandString = "close media";
+            mciSendString(commandString, null, 0, IntPtr.Zero);
+
+            isOpenMP3 = false;
         }
 
         private static void listener_SocketAccepted(Socket e)
